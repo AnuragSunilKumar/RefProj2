@@ -10,6 +10,4 @@ import org.springframework.stereotype.Repository;
 public interface JobRepository extends JpaRepository <Jobs,Integer>{
     public Jobs findById(int id);
     
-    
-    
 }

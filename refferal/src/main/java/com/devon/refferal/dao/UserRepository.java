@@ -11,4 +11,5 @@ import com.devon.refferal.entites.User;
 public interface UserRepository extends JpaRepository<User, String> {
 
 	
+	
 }

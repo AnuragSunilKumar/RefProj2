@@ -3,6 +3,7 @@ package com.devon.refferal.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.devon.refferal.dao.JobRepository;
 import com.devon.refferal.entites.Jobs;
 import com.devon.refferal.services.JobServices;
 
@@ -22,16 +23,21 @@ public class JobController {
 
     @Autowired
     private JobServices jobService;
+    
+    
+    @Autowired
+    private JobRepository jobRepository;
 
     // get all jobs handler
     @GetMapping("/jobs")
-    public ResponseEntity<List<Jobs>> getjobs() {
-
-        List<Jobs> list = jobService.getAllJobs();
-        if (list.size() <= 0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(list);
+    public List<Jobs> getjobs() {
+		/*
+		 * List<Jobs> list = jobService.getAllJobs(); if (list.size() <= 0) { return
+		 * ResponseEntity.status(HttpStatus.NOT_FOUND).build(); } return
+		 * ResponseEntity.status(HttpStatus.CREATED).body(list);
+		 */
+    	 List<Jobs> list = (List<Jobs>) this.jobRepository.findAll();
+         return list;
     }
 
     // get single Jobs handler
@@ -62,7 +68,7 @@ public class JobController {
 
     // delete Jobs handler
 
-    @DeleteMapping("/jobsdelete/{jobId}")
+    @DeleteMapping("/jobs/{jobId}")
     public ResponseEntity<Void> deletejob(@PathVariable("jobId") int jobId) {
         try {
             this.jobService.deleteJobs(jobId);
@@ -75,7 +81,7 @@ public class JobController {
     }
 
     // update Jobs handler
-    @PutMapping("/jobsupdate/{jobId}")
+    @PutMapping("/jobs/{jobId}")
     public ResponseEntity<Jobs> updatejob(@RequestBody Jobs jobs, @PathVariable("jobId") int jobId) {
         try {
             this.jobService.updateJob(jobs, jobId);

@@ -1,31 +1,30 @@
 package com.devon.refferal.entites;
 
+import com.devon.refferal.dto.UserDTO;
+
 public class JwtResponse {
 	
-	private User user;
+	private UserDTO userDTO;
 	private String jwtToken;
-	
-	public JwtResponse(User user, String jwtToken) {
+	public JwtResponse(UserDTO userDTO, String jwtToken) {
 		super();
-		this.user = user;
+		this.userDTO = userDTO;
 		this.jwtToken = jwtToken;
 	}
-
-	public User getUser() {
-		return user;
+	public UserDTO getUserDTO() {
+		return userDTO;
 	}
-
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
 	}
-
 	public String getJwtToken() {
 		return jwtToken;
 	}
-
 	public void setJwtToken(String jwtToken) {
 		this.jwtToken = jwtToken;
 	}
+	
+	
 	
 	
 

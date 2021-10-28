@@ -15,8 +15,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.devon.refferal.dao.UserRepository;
+import com.devon.refferal.dto.UserDTO;
 import com.devon.refferal.entites.JwtRequest;
 import com.devon.refferal.entites.JwtResponse;
+import com.devon.refferal.entites.Role;
 import com.devon.refferal.entites.User;
 import com.devon.refferal.util.JwtUtil;
 
@@ -32,6 +34,8 @@ public class JwtService implements UserDetailsService {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
+	
+	
 	public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception
 	{
 		String userName = jwtRequest.getUserName();
@@ -41,11 +45,28 @@ public class JwtService implements UserDetailsService {
 		
 		String newGeneratedToken = jwtUtil.generateToken(userDetails);
 		
+		Role role = new Role();
 		User user = userRepository.findById(userName).get();
-		
-		return new JwtResponse(user, newGeneratedToken);
+		UserDTO userDTO = new UserDTO();
+        userDTO.setName(user.getName());
+        userDTO.setEmail(user.getEmail());
+		userDTO.setRolename(user.getRole().stream().findFirst().get().getRolename());
+		return new JwtResponse(userDTO, newGeneratedToken);
 	
 	}
+	
+	/*
+	 * public List<UserDTO> getAllUsers() { return ((List<User>) userRepository
+	 * .findAll()) .stream() .map(this::convertToUserDTO)
+	 * .collect(Collectors.toList()); }
+	 */
+	
+	/*
+	 * private UserDTO convertToUserDTO(User user) { UserDTO userDTO = new
+	 * UserDTO(); userDTO.setName(user.getName());
+	 * userDTO.setEmail(user.getEmail()); return userDTO; }
+	 */
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

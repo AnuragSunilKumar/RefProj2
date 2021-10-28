@@ -13,7 +13,16 @@ public class JobServices {
 
     @Autowired
     private JobRepository jobRepository;
-    
+    //private static List<Jobs> list = new ArrayList<>();
+
+    /*static {
+        list.add(new Jobs(12, "Java Developer", "Java Development", "5-6 Exp", "Amrita"));
+        list.add(new Jobs(13, "Steve", "Rogers", "rogers@gmail.com", "Avengers"));
+        list.add(new Jobs(14, "anurag", "Sk", "sk@gmail.com", "Avengers"));
+
+    }*/
+
+    // get all jobs
     public List<Jobs> getAllJobs() {
         List<Jobs> list = (List<Jobs>) this.jobRepository.findAll();
         return list;
@@ -24,7 +33,7 @@ public class JobServices {
         Jobs jobs = null;
         try {
 
-        
+           // jobs = list.stream().filter(e -> e.getId() == id).findFirst().get();
            this.jobRepository.findById(id);
         } catch (Exception e) 
         {
@@ -41,7 +50,7 @@ public class JobServices {
 
     // delete jobs
     public void deleteJobs(int jid) {
-     
+        //list = list.stream().filter(job -> job.getId() != jid).collect(Collectors.toList());
         jobRepository.deleteById(jid);
     }
 

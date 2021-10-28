@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devon.refferal.entites.User;
 import com.devon.refferal.services.UserService;
 
-@Controller
+@RestController
 
 public class UserController {
 	
