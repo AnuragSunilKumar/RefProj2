@@ -30,15 +30,13 @@ public class JobController {
 
     // get all jobs handler
     @GetMapping("/jobs")
-    public List<Jobs> getjobs() {
-		/*
-		 * List<Jobs> list = jobService.getAllJobs(); if (list.size() <= 0) { return
-		 * ResponseEntity.status(HttpStatus.NOT_FOUND).build(); } return
-		 * ResponseEntity.status(HttpStatus.CREATED).body(list);
-		 */
-    	 List<Jobs> list = (List<Jobs>) this.jobRepository.findAll();
-         return list;
-    }
+    public ResponseEntity<List<Jobs>>getjobs() {
+		
+		 List<Jobs> list = jobService.getAllJobs(); if (list.size() <= 0) { return
+		  ResponseEntity.status(HttpStatus.NOT_FOUND).build(); } return
+		 ResponseEntity.status(HttpStatus.CREATED).body(list);
+		 
+    }	
 
     // get single Jobs handler
     @GetMapping("/jobs/{id}")

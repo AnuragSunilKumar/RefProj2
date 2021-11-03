@@ -13,15 +13,7 @@ public class JobServices {
 
     @Autowired
     private JobRepository jobRepository;
-    //private static List<Jobs> list = new ArrayList<>();
-
-    /*static {
-        list.add(new Jobs(12, "Java Developer", "Java Development", "5-6 Exp", "Amrita"));
-        list.add(new Jobs(13, "Steve", "Rogers", "rogers@gmail.com", "Avengers"));
-        list.add(new Jobs(14, "anurag", "Sk", "sk@gmail.com", "Avengers"));
-
-    }*/
-
+   
     // get all jobs
     public List<Jobs> getAllJobs() {
         List<Jobs> list = (List<Jobs>) this.jobRepository.findAll();
@@ -33,7 +25,6 @@ public class JobServices {
         Jobs jobs = null;
         try {
 
-           // jobs = list.stream().filter(e -> e.getId() == id).findFirst().get();
            this.jobRepository.findById(id);
         } catch (Exception e) 
         {
@@ -55,9 +46,10 @@ public class JobServices {
     }
 
     // Update job
-    public void updateJob(Jobs job, int jobsId) {
+    public Jobs updateJob(Jobs job, int jobsId) {
         
         job.setId(jobsId);
-        jobRepository.save(job);
+        Jobs result =jobRepository.save(job);
+        return result;
     }
 }

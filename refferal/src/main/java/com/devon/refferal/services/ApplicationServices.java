@@ -27,14 +27,19 @@ public class ApplicationServices {
         return result;
 
     }
+    
+    //delete applications
     public void deleteApplications(int aid)
     {
         applicationRepository.deleteById(aid);
     }
-    public void updateApplications(Applications applications, int appId)
+    
+    //update applications
+    public Applications updateApplications(Applications applications, int appId)
     {
         applications.setId(appId);
-        applicationRepository.save(applications);
+       Applications result =  applicationRepository.save(applications);
+       return result;
     }
 
 }
